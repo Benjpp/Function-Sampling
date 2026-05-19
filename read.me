@@ -1,0 +1,62 @@
+
+# 🌀 CUDA Algebraic Function Sampler
+
+[![C-CUDA](https://img.shields.io/badge/Language-C%20%2F%20CUDA-green.svg)](https://developer.nvidia.com/cuda-zone)
+[![Python-OpenGL](https://img.shields.io/badge/Graphics-Python%20%2F%20OpenGL-blue.svg)](https://www.opengl.org/)
+
+Un muestreador de funciones de alto rendimiento que evalúa expresiones algebraicas en la GPU para generar nubes de puntos de alta resolución.
+
+## 📝 Descripción
+
+Este programa permite el cálculo paralelo de funciones matemáticas complejas. Dado una expresión algebraica y su orden, el sistema utiliza **CUDA** para procesar los puntos en una máquina de cómputo y transfiere los resultados a un archivo de texto en una máquina destino para su posterior visualización 3D.
+
+## ⚙️ Flujo de Trabajo
+
+1.  **Input:** Recibe la expresión (ej. `y = x^2 + 5`) y el orden.
+2.  **GPU Compute:** Un kernel de CUDA calcula los puntos $(x, y)$ de forma masiva.
+3.  **Data Transfer:** Los puntos se guardan en un `.txt` en la máquina destino.
+4.  **Visualización:** Un cliente en **Python + OpenGL** renderiza los puntos obtenidos.
+
+## 🚀 Características
+
+*   **Cómputo Paralelo:** Uso intensivo de núcleos CUDA para un sampling ultra rápido.
+*   **Precisión Ajustable:** Control del paso de tiempo/espacio para la densidad de puntos.
+*   **Visualización 3D:** Renderizado fluido mediante OpenGL.
+*   **Arquitectura Distribuida:** El cómputo y la visualización pueden ejecutarse en entornos separados.
+
+## 📋 Requisitos
+
+### Máquina de Cómputo (C/CUDA)
+*   GPU NVIDIA con soporte para CUDA.
+*   [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) instalado.
+*   Compilador `nvcc`.
+
+### Máquina de Destino (Python)
+*   Python 3.x
+*   Dependencias de visualización:
+    ```bash
+    pip install PyOpenGL numpy
+    ```
+
+## 🛠️ Instalación y Uso
+
+1.  **Clona el repositorio:**
+    
+```bash
+    git clone [https://github.com/tu-usuario/nombre-del-repo.git](https://github.com/tu-usuario/nombre-del-repo.git)
+    cd nombre-del-repo
+    ```
+
+2.  **Compila el código CUDA:**
+    ```bash
+    nvcc sampler.cu -o sampler -lm
+    ```
+
+3.  **Ejecuta el muestreo:**
+    ```bash
+    ./sampler --expr "x^2 + 3" --order 2
+    ```
+
+4.  **Visualiza los datos:**
+    ```bash
+    python visualizer.py datos_generados.txt
